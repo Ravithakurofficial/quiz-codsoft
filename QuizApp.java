@@ -25,7 +25,47 @@ public class QuizApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add logic to create a quiz
-                JOptionPane.showMessageDialog(QuizApp.this, "You selected 'Make Quiz'. Create your quiz here.");
+                String question = JOptionPane.showInputDialog(QuizApp.this, "Enter a question:");
+                
+                if (question != null && !question.isEmpty()) {
+                    String[] options = new String[4]; // Assuming 4 options
+                    
+                    for (int i = 0; i < options.length; i++) {
+                        options[i] = JOptionPane.showInputDialog(QuizApp.this, "Enter option " + (i + 1) + ":");
+                        
+                        if (options[i] == null || options[i].isEmpty()) {
+                            JOptionPane.showMessageDialog(QuizApp.this, "Option " + (i + 1) + " not entered or input canceled.");
+                            return; // Exit the quiz creation
+                        }
+                    }
+                    
+                    String correctOption = (String) JOptionPane.showInputDialog(
+                        QuizApp.this,
+                        "Select the correct option:",
+                        "Choose Correct Option",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0] // Default option
+                    );
+                    
+                    if (correctOption != null) {
+                        // You can save the question, options, and correctOption and perform further actions
+                        // For now, let's just display the entered information as confirmation
+                        StringBuilder result = new StringBuilder();
+                        result.append("Question: ").append(question).append("\nOptions:\n");
+                        for (String option : options) {
+                            result.append(option).append("\n");
+                        }
+                        result.append("Correct Option: ").append(correctOption);
+                        
+                        JOptionPane.showMessageDialog(QuizApp.this, result.toString());
+                    } else {
+                        JOptionPane.showMessageDialog(QuizApp.this, "No correct option selected or selection canceled.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(QuizApp.this, "No question entered or input canceled.");
+                }
             }
         });
 
