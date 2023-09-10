@@ -13,7 +13,7 @@ public class Quiz extends JFrame {
     private int currentQuestionIndex = 0;
     private int score = 0;
     private boolean quizInProgress = false;
-    private Map<Question, String> userResponses = new HashMap<>(); // Initialize userResponses here
+    private Map<Question, String> userResponses = new HashMap<>(); 
 
     private JButton makeQuizButton;
     private Timer timer;
@@ -81,7 +81,7 @@ public class Quiz extends JFrame {
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        answerLabel = new JLabel(""); // Initialize the answerLabel
+        answerLabel = new JLabel(""); 
         answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(answerLabel, BorderLayout.CENTER);
 
@@ -110,7 +110,7 @@ public class Quiz extends JFrame {
     }
 
     private void startQuiz() {
-        userResponses = new HashMap<>(); // Initialize the userResponses map
+        userResponses = new HashMap<>();
         if (currentQuestionIndex < defaultQuestions.size()) {
             displayQuestion(defaultQuestions.get(currentQuestionIndex));
         } else {
@@ -156,12 +156,12 @@ public class Quiz extends JFrame {
                 userResponses.put(question, selectedOption);
 
                 if (currentQuestionIndex < defaultQuestions.size() - 1) {
-                    // If there are more questions, proceed to the next question
+                    
                     currentQuestionIndex++;
                     displayQuestion(defaultQuestions.get(currentQuestionIndex));
                     resetTimer();
                 } else {
-                    // If this was the last question, show the quiz results
+                
                     showQuizResults();
                 }
             }
@@ -215,7 +215,7 @@ public class Quiz extends JFrame {
     }
 
     private void startTimer() {
-        timeRemaining = 30; // Set the initial time limit for each question (adjust as needed)
+        timeRemaining = 30; 
         timerLabel.setText("Time Remaining: " + timeRemaining + " seconds");
 
         timer = new Timer(1000, new ActionListener() {
@@ -223,11 +223,11 @@ public class Quiz extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 timeRemaining--;
 
-                // Update the timer label with the remaining time
+                
                 timerLabel.setText("Time Remaining: " + timeRemaining + " seconds");
 
                 if (timeRemaining <= 0) {
-                    // Time's up! Proceed to the next question or show results
+                    
                     timer.stop();
                     JOptionPane.showMessageDialog(Quiz.this, "Time's up!");
                     currentQuestionIndex++;
@@ -240,12 +240,12 @@ public class Quiz extends JFrame {
                 }
             }
         });
-        timer.setInitialDelay(0); // Start the timer immediately when displaying a new question
+        timer.setInitialDelay(0);
         timer.start();
     }
 
     private void resetTimer() {
-        timeRemaining = 30; // Reset the timer for each question
+        timeRemaining = 30;
         timerLabel.setText("Time Remaining: " + timeRemaining + " seconds");
         timer.restart();
     }
